@@ -12,6 +12,10 @@ struct ContentView: View {
     // MARK: - PROPERTIES
     @State var task: String = ""
     
+    private var isButtonDisabled: Bool{
+        task.isEmpty
+    }
+    
     // FETCHING DATA
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -31,14 +35,12 @@ struct ContentView: View {
             do {
                 try viewContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
     }
-
+    
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             offsets.map { items[$0] }.forEach(viewContext.delete)
@@ -46,8 +48,6 @@ struct ContentView: View {
             do {
                 try viewContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
@@ -56,6 +56,7 @@ struct ContentView: View {
     
     
     // MARK: - BODY
+    
     
     var body: some View {
         NavigationView {
@@ -73,27 +74,34 @@ struct ContentView: View {
                         Text("SAVE")
                         Spacer()
                     })
+                        .disabled(isButtonDisabled)
                         .padding()
                         .font(.headline)
                         .foregroundColor(Color.white)
-                        .background(Color.red)
-                    cornerRadius(10)
+                        .background(isButtonDisabled ? Color.gray : Color.pink)
+                        .cornerRadius(10)
                 }.padding()
                 List {
                     ForEach(items) { item in
-                        NavigationLink {
+                        VStack(alignment: .leading){
+                            Text(item.task ?? "")
+                                .font(.headline)
+                                .fontWeight(.bold)
                             Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                        } label: {
-                            Text(item.timestamp!, formatter: itemFormatter)
+                                .font(.footnote)
+                                .foregroundColor(.gray)
                         }
-                    }
+                     }
                     .onDelete(perform: deleteItems)
                  }//: LIST
                }//: VSTACK
+            .navigationBarTitle("Daily Tasks",displayMode: .large)
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
+                    #if os(iOS)
+                    ToolbarItem(placement: .navigationBarLeading) {
                         EditButton()
                     }
+                    #endif
                     ToolbarItem {
                         Button(action: addItem) {
                             Label("Add Item", systemImage: "plus")
@@ -110,6 +118,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ContentView()
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
