@@ -9,6 +9,10 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    // MARK: - PROPERTIES
+    @State var task: String = ""
+    
+    // FETCHING DATA
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
@@ -16,32 +20,9 @@ struct ContentView: View {
         animation: .default)
     private var items: FetchedResults<Item>
 
-    var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-            Text("Select an item")
-        }
-    }
-
+    
+    // MARK: - FUNCTIONS
+    
     private func addItem() {
         withAnimation {
             let newItem = Item(context: viewContext)
@@ -72,14 +53,60 @@ struct ContentView: View {
             }
         }
     }
+    
+    
+    // MARK: - BODY
+    
+    var body: some View {
+        NavigationView {
+            VStack {
+                VStack(spacing: 16){
+                    TextField("New Task", text: $task)
+                        .padding()
+                        .background(
+                            Color(UIColor.systemGray6)
+                        ).cornerRadius(10)
+                    Button(action:{
+                        addItem()
+                    },label: {
+                        Spacer()
+                        Text("SAVE")
+                        Spacer()
+                    })
+                        .padding()
+                        .font(.headline)
+                        .foregroundColor(Color.white)
+                        .background(Color.red)
+                    cornerRadius(10)
+                }.padding()
+                List {
+                    ForEach(items) { item in
+                        NavigationLink {
+                            Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+                        } label: {
+                            Text(item.timestamp!, formatter: itemFormatter)
+                        }
+                    }
+                    .onDelete(perform: deleteItems)
+                 }//: LIST
+               }//: VSTACK
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        EditButton()
+                    }
+                    ToolbarItem {
+                        Button(action: addItem) {
+                            Label("Add Item", systemImage: "plus")
+                        }
+                    }
+            }
+            
+            Text("Select an item")
+           
+        }
+    }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
