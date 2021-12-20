@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D513054427709A7D000D9AE1 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D513054327709A7D000D9AE1 /* Constant.swift */; };
+		D513054D2770D14C000D9AE1 /* HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D513054C2770D14C000D9AE1 /* HideKeyboard.swift */; };
 		D58B42DA27676BC40001E04F /* DEVOTE_0_2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58B42D927676BC40001E04F /* DEVOTE_0_2App.swift */; };
 		D58B42DC27676BC40001E04F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58B42DB27676BC40001E04F /* ContentView.swift */; };
 		D58B42DE27676BC60001E04F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D58B42DD27676BC60001E04F /* Assets.xcassets */; };
@@ -20,7 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D513054327709A7D000D9AE1 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = SOURCE_ROOT; };
+		D513054327709A7D000D9AE1 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constant.swift; path = DEVOTE.0.2/Utility/Constant.swift; sourceTree = SOURCE_ROOT; };
+		D513054C2770D14C000D9AE1 /* HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboard.swift; sourceTree = "<group>"; };
 		D58B42D627676BC40001E04F /* DEVOTE.0.2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DEVOTE.0.2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D58B42D927676BC40001E04F /* DEVOTE_0_2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DEVOTE_0_2App.swift; sourceTree = "<group>"; };
 		D58B42DB27676BC40001E04F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -45,6 +47,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D51305482770D0BF000D9AE1 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
+		D51305492770D0E0000D9AE1 /* Extentions */ = {
+			isa = PBXGroup;
+			children = (
+				D513054C2770D14C000D9AE1 /* HideKeyboard.swift */,
+			);
+			path = Extentions;
+			sourceTree = "<group>";
+		};
+		D513054B2770D11D000D9AE1 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				D513054327709A7D000D9AE1 /* Constant.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		D58B42CD27676BC40001E04F = {
 			isa = PBXGroup;
 			children = (
@@ -64,12 +89,12 @@
 		D58B42D827676BC40001E04F /* DEVOTE.0.2 */ = {
 			isa = PBXGroup;
 			children = (
+				D513054B2770D11D000D9AE1 /* Utility */,
+				D51305492770D0E0000D9AE1 /* Extentions */,
+				D51305482770D0BF000D9AE1 /* Styles */,
 				D58B42F827678BB30001E04F /* DEVOTE-0-2-Info.plist */,
 				D58B42F7276789E90001E04F /* Model */,
 				D58B42EC276785B20001E04F /* Sounds */,
-				D58B42F6276789C40001E04F /* Style */,
-				D58B42F5276789B30001E04F /* Extentions */,
-				D58B42F42767898F0001E04F /* Utility */,
 				D58B42F3276789700001E04F /* Views */,
 				D58B42D927676BC40001E04F /* DEVOTE_0_2App.swift */,
 				D58B42DD27676BC60001E04F /* Assets.xcassets */,
@@ -102,28 +127,6 @@
 				D58B42DB27676BC40001E04F /* ContentView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		D58B42F42767898F0001E04F /* Utility */ = {
-			isa = PBXGroup;
-			children = (
-				D513054327709A7D000D9AE1 /* Constant.swift */,
-			);
-			path = Utility;
-			sourceTree = "<group>";
-		};
-		D58B42F5276789B30001E04F /* Extentions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extentions;
-			sourceTree = "<group>";
-		};
-		D58B42F6276789C40001E04F /* Style */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Style;
 			sourceTree = "<group>";
 		};
 		D58B42F7276789E90001E04F /* Model */ = {
@@ -212,6 +215,7 @@
 				D58B42DC27676BC40001E04F /* ContentView.swift in Sources */,
 				D513054427709A7D000D9AE1 /* Constant.swift in Sources */,
 				D58B42E627676BC60001E04F /* DEVOTE_0_2.xcdatamodeld in Sources */,
+				D513054D2770D14C000D9AE1 /* HideKeyboard.swift in Sources */,
 				D58B42DA27676BC40001E04F /* DEVOTE_0_2App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
